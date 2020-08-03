@@ -17,8 +17,6 @@ class SignUpController extends Controller
             'password' => 'required|min:8',
         ]));
 
-        event(new Registered($user));
-
         $user->api_token = $user->createToken($request->input('device_name', ''))->plainTextToken;
 
         return (new UserResource($user))->response()
